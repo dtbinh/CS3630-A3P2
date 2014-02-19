@@ -41,11 +41,12 @@ class Scribbler2:
       retval = self.read_2byte()
     finally:
       self.lock.release()
-    print retval
+    print "retval:" + str(retval)
     self.logNow(retval)
     return retval
 
   def logNow(self, sensor):
+    print "%s %s %s"%(sensor,self.l,self.r)
     self.log.write("%s %s %s\n" %(sensor, self.l, self.r))
 
   def setMotors(self, left=0, right=0):
