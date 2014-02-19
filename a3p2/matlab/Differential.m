@@ -227,18 +227,18 @@ classdef Differential < handle
             uR=u(2);
             
             % Get constants from assignment 2
-            r = 0; %% <------ IMPLEMENT
-            L = 0; %% <------ IMPLEMENT
+            r = .00065; %%From A2P2
+            L = .14; %% 14 cm. I don't know if these units are right
             
             % calculate speed
-            vx = 0; %% <------ IMPLEMENT
-            omega = 0; %% <------ IMPLEMENT
+            vx = r.*((uL+uR)./2); %%Formula from A2P2
+            omega = (r./L).*(uR-uL); %%Formula from A2P2
             
             % update new state using Euler integration, not expmap 
             xp = veh.x; % previous state
-            veh.x(1) = 0; %% <------ IMPLEMENT
-            veh.x(2) = 0; %% <------ IMPLEMENT
-            veh.x(3) = 0; %% <------ IMPLEMENT
+            veh.x(1) = xp(1)+(vx/omega)*sin(omega*veh.dt); %% <------ IMPLEMENT
+            veh.x(2) = xp(2)+(vx/omega)*(1-cos(omega*veh.dt)); %% <------ IMPLEMENT
+            veh.x(3) = xp(3)+omega*veh.dt; %% <------ IMPLEMENT
             
             odo = [vx*veh.dt omega*veh.dt];
             veh.odometry = odo;
