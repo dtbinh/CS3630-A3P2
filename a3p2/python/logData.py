@@ -6,7 +6,7 @@ from Scribbler2 import *
 
 fname = "log-%d.txt" % time.time()
 
-s = Scribbler2('/dev/rfcomm0',fname)
+s = Scribbler2('COM4',fname)
 
 # Set timeout to zero
 print 'Connected!'
@@ -17,10 +17,12 @@ commands = []
 # Command is a list [cmd, leftMotor, rightMotor, time]
 # Setting motors to 200 will drive 
 # forward with the fluke facing forward
-commands.append([200, 200, 4])
-commands.append([200, -100, 1])
-commands.append([200, 200, 8])
-commands.append([0, 0, 2])
+commands.append([100, 100, 12])
+commands.append([-100, 100, 1.7])
+commands.append([100,100, 5])
+commands.append([100,-100, 1.7])
+commands.append([100,100,15])
+commands.append([0,0,1])
 print ("Start!")
 for c in commands:
   start = time.time()
