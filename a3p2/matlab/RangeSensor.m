@@ -264,7 +264,7 @@ classdef RangeSensor < Sensor
 
           % Straightforward code:
           %
-          % for p = 1:length(x)
+          %  for p = 1:length(x)
           %    % what do we expect observation to be for this particle?
           %    % use the sensor model h(.)
           %    z_pred = sensor.h( x(p,:), jf);
@@ -279,9 +279,13 @@ classdef RangeSensor < Sensor
           %    % The weight is never zero.
           %    weight(p) = exp(-0.5*innov'*inv(L)*innov) + 0.05;
           % end
-          
           weights = zeros(length(x),1);
           
+          for p = 1:length(x)
+              z_pred = s.h( transpose(x(p,:)));
+              q = z - z_pred;
+              weights(p) = exp(-0.5*q'*inv(L)*q) + 0.05;
+          end
           %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
           %              TODO: Implement this function!
           %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

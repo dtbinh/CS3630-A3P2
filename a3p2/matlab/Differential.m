@@ -142,7 +142,7 @@ classdef Differential < handle
             opt.vmax = 5;
             opt.L = 1;
             opt.rdim = 0.2;
-            opt.dt = 0.1;
+            opt.dt = 0.2;  % Changed due to sensor polling JW
             opt.x0 = zeros(3,1);
             opt = tb_optparse(opt, varargin);
 
